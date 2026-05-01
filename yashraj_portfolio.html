@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yashraj Barad | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1c1008;
+  --bg2:#231408;
+  --card:#2a1a09;
+  --card2:#321f0a;
+  --clay:#f0a757;
+  --clay2:#e08934;
+  --sand:#f5c878;
+  --terracotta:#c9683a;
+  --terra2:#e07a4f;
+  --blush:#f2c4a0;
+  --sage:#a8c5a0;
+  --cream:#f7ead8;
+  --warm-white:#fdf5ea;
+  --text:#f5e8d0;
+  --text2:#d4aa7a;
+  --muted:#8a6640;
+  --border:rgba(240,167,87,0.12);
+  --border2:rgba(240,167,87,0.28);
+  --glow:rgba(240,167,87,0.18);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* Subtle grain texture */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.4;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 80% 0%, rgba(201,104,58,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(240,167,87,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(193,89,40,0.05) 0%, transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 5%;
+  background:rgba(28,16,8,0.85);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s;
+}
+nav.scrolled{background:rgba(28,16,8,0.97);box-shadow:0 4px 40px rgba(0,0,0,0.5)}
+
+/* LOGO SVG */
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;}
+.logo-svg{width:42px;height:42px;flex-shrink:0;}
+.logo-text{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--cream);letter-spacing:0.5px;line-height:1;}
+.logo-text em{display:block;font-style:normal;font-size:0.62rem;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;letter-spacing:2px;text-transform:uppercase;margin-top:1px;}
+
+.navlinks{display:flex;gap:2px;list-style:none;align-items:center;}
+.navlinks li a{
+  color:var(--text2);font-size:0.83rem;font-weight:500;
+  text-decoration:none;padding:8px 14px;border-radius:8px;
+  cursor:pointer;transition:all 0.2s;display:block;position:relative;
+}
+.navlinks li a:hover{color:var(--clay);background:rgba(240,167,87,0.07)}
+.navlinks li a.act{color:var(--clay)}
+.navlinks li a.act::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:16px;height:2px;background:linear-gradient(90deg,var(--clay),var(--terracotta));border-radius:2px;}
+.hire-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(135deg,var(--clay),var(--terracotta));
+  color:var(--warm-white)!important;font-weight:700!important;font-size:0.81rem!important;
+  padding:9px 20px!important;border-radius:50px!important;
+  box-shadow:0 0 24px rgba(201,104,58,0.3);
+  transition:all 0.25s!important;text-decoration:none!important;
+}
+.hire-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,104,58,0.5)!important}
+.hire-btn svg{width:14px;height:14px;flex-shrink:0}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+.ham span{display:block;width:22px;height:2px;background:var(--clay);border-radius:2px;transition:all 0.3s}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.ham.open span:nth-child(2){opacity:0;transform:translateX(-8px)}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobnav{
+  display:none;position:fixed;top:62px;left:0;right:0;
+  background:rgba(28,16,8,0.98);backdrop-filter:blur(20px);
+  padding:1.2rem;z-index:199;border-bottom:1px solid var(--border);
+  flex-direction:column;gap:3px;
+}
+.mobnav.open{display:flex}
+.mobnav a{color:var(--text);font-size:0.95rem;font-weight:500;padding:12px 16px;border-radius:10px;cursor:pointer;text-decoration:none;transition:all 0.2s;display:flex;align-items:center;gap:10px;}
+.mobnav a:hover{color:var(--clay);background:rgba(240,167,87,0.06)}
+.mobnav .mob-hire{background:rgba(201,104,58,0.12);border:1px solid rgba(201,104,58,0.3);color:var(--clay)!important;margin-top:8px;justify-content:center;border-radius:50px!important;}
+
+/* PAGES */
+.pg{display:none;min-height:100vh;padding-top:62px;position:relative;z-index:1}
+.pg.show{display:block}
+.enter{animation:pgIn 0.5s cubic-bezier(0.22,1,0.36,1) both}
+@keyframes pgIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* UTILS */
+.wrap{max-width:1080px;margin:0 auto;padding:5rem 5%}
+.tag-label{display:inline-flex;align-items:center;gap:8px;font-size:0.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--clay);margin-bottom:14px;}
+.tag-label::before{content:'';width:22px;height:1px;background:linear-gradient(90deg,var(--clay),transparent);}
+.tag-label::after{content:'';width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--clay));}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;line-height:1.05;letter-spacing:-1px;margin-bottom:1rem;}
+.sec-h span{background:linear-gradient(135deg,var(--clay) 0%,var(--terra2) 50%,var(--sand) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-p{font-size:0.92rem;color:var(--text2);line-height:1.9;max-width:500px}
+.hr{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:2.5rem 0;position:relative;}
+.hr::after{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:0.5rem;color:var(--clay);background:var(--bg);padding:0 8px;}
+.btn-fill{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--clay),var(--terracotta));color:var(--warm-white);padding:12px 26px;border-radius:50px;font-weight:700;font-size:0.85rem;cursor:pointer;border:none;text-decoration:none;transition:all 0.25s;box-shadow:0 0 28px rgba(201,104,58,0.25);}
+.btn-fill:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(201,104,58,0.45)}
+.btn-line{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text);border:1px solid var(--border2);padding:12px 26px;border-radius:50px;font-weight:500;font-size:0.85rem;cursor:pointer;text-decoration:none;transition:all 0.25s;}
+.btn-line:hover{border-color:var(--clay);color:var(--clay);background:rgba(240,167,87,0.06)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp 0.7s ease both}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.22s}.d3{animation-delay:0.34s}.d4{animation-delay:0.46s}
+.gcard{background:var(--card);border:1px solid var(--border);border-radius:20px;transition:all 0.35s;position:relative;overflow:hidden;}
+.gcard::before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 0%,rgba(240,167,87,0.06),transparent 55%);opacity:0;transition:opacity 0.35s;pointer-events:none;}
+.gcard:hover{border-color:var(--border2);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.4),0 0 0 1px rgba(240,167,87,0.08);}
+.gcard:hover::before{opacity:1}
+
+/* ===== HOME ===== */
+.hero{min-height:calc(100vh - 62px);display:flex;align-items:center;padding:4rem 5% 5rem;position:relative;overflow:hidden;}
+.hero-inner{max-width:680px;position:relative;z-index:2}
+.status-pill{display:inline-flex;align-items:center;gap:9px;background:rgba(168,197,160,0.1);border:1px solid rgba(168,197,160,0.28);color:#a8c5a0;font-size:0.7rem;font-weight:700;padding:6px 18px;border-radius:50px;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:2rem;animation:fadeUp 0.5s ease both;}
+.sdot{width:7px;height:7px;background:#a8c5a0;border-radius:50%;animation:pulse-sage 2.2s ease-in-out infinite;flex-shrink:0;}
+@keyframes pulse-sage{0%,100%{box-shadow:0 0 0 0 rgba(168,197,160,0.7)}50%{box-shadow:0 0 0 7px rgba(168,197,160,0)}}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,5.8rem);font-weight:900;line-height:0.9;letter-spacing:-2px;margin-bottom:1.3rem;animation:fadeUp 0.5s 0.08s ease both;}
+.hero-name .grad{background:linear-gradient(135deg,var(--clay) 0%,var(--terra2) 50%,var(--sand) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-name .dim{color:rgba(245,232,208,0.08)}
+.typo-wrap{font-size:clamp(0.95rem,2vw,1.12rem);color:var(--text2);font-weight:400;margin-bottom:1.6rem;min-height:2em;animation:fadeUp 0.5s 0.16s ease both;display:flex;align-items:center;gap:10px;}
+.typo-wrap .tw{color:var(--clay);font-weight:600;}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--clay);animation:blink 0.9s ease-in-out infinite;vertical-align:middle;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-bio{font-size:0.92rem;color:var(--text2);line-height:1.95;max-width:520px;margin-bottom:2.5rem;animation:fadeUp 0.5s 0.24s ease both;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:3.5rem;animation:fadeUp 0.5s 0.32s ease both;}
+.hstats{display:flex;gap:0;animation:fadeUp 0.5s 0.4s ease both;background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;width:fit-content;}
+.hs{padding:1.2rem 2rem;text-align:center;position:relative;}
+.hs+.hs::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:var(--border);}
+.hs .n{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:var(--clay);display:block;line-height:1;}
+.hs .l{font-size:0.68rem;color:var(--muted);letter-spacing:0.8px;margin-top:4px;display:block;}
+
+/* Decorative circles */
+.hero-decor{position:absolute;right:2%;top:50%;transform:translateY(-50%);width:360px;height:360px;pointer-events:none;}
+@media(max-width:999px){.hero-decor{display:none}}
+.hd-ring{position:absolute;border-radius:50%;inset:0;}
+.hdr1{border:1px solid rgba(240,167,87,0.1);animation:spin 35s linear infinite;}
+.hdr2{inset:40px;border:1px solid rgba(201,104,58,0.12);animation:spin 25s linear infinite reverse;}
+.hdr3{inset:80px;border:1px dashed rgba(240,167,87,0.14);animation:spin 18s linear infinite;}
+.hd-center{position:absolute;inset:115px;border-radius:50%;background:radial-gradient(circle,rgba(240,167,87,0.1),rgba(201,104,58,0.05),transparent 70%);display:flex;align-items:center;justify-content:center;}
+.hd-icon{font-size:2.4rem;animation:floatAnim 4s ease-in-out infinite;}
+.hd-dot{position:absolute;border-radius:50%;}
+.hdd1{width:10px;height:10px;background:var(--clay);opacity:0.5;top:14%;right:30%;animation:floatAnim 3s ease-in-out infinite;}
+.hdd2{width:7px;height:7px;background:var(--terra2);opacity:0.4;top:62%;right:19%;animation:floatAnim 4.2s ease-in-out infinite 1s;}
+.hdd3{width:11px;height:11px;background:var(--sand);opacity:0.3;top:38%;right:6%;animation:floatAnim 3.8s ease-in-out infinite 0.5s;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes floatAnim{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+/* ===== ABOUT ===== */
+.about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:3.5rem;align-items:start;margin-top:3rem;}
+.profile-card{background:var(--card);border:1px solid var(--border);border-radius:22px;overflow:hidden;}
+.pc-top{height:170px;background:linear-gradient(135deg,#1e0e04,#2c1505);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.pc-top::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(240,167,87,0.18),transparent 60%);}
+.av-ring{width:92px;height:92px;border-radius:50%;border:2px solid rgba(240,167,87,0.4);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;background:radial-gradient(circle,rgba(240,167,87,0.12),transparent);}
+.av-ring::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px dashed rgba(240,167,87,0.25);animation:spin 16s linear infinite;}
+.av-init{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:900;background:linear-gradient(135deg,var(--clay),var(--terra2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.pc-body{padding:1.4rem;}
+.irow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.82rem;}
+.irow:last-child{border:none}
+.irow .ico{font-size:0.9rem;width:18px;text-align:center;flex-shrink:0}
+.irow .k{color:var(--muted);font-size:0.7rem;width:88px;flex-shrink:0;letter-spacing:0.2px}
+.irow .v{color:var(--text);font-weight:500;font-size:0.82rem}
+.about-r p{font-size:0.91rem;color:var(--text2);line-height:1.95;margin-bottom:1rem;}
+.about-r .hl{color:var(--clay);font-weight:600}
+.tag-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:0.7rem}
+.ttech{background:rgba(240,167,87,0.07);border:1px solid rgba(240,167,87,0.2);color:var(--clay);border-radius:8px;padding:5px 13px;font-size:0.75rem;font-weight:500;transition:all 0.2s;cursor:default;}
+.ttech:hover{background:rgba(240,167,87,0.14);transform:translateY(-2px)}
+.tsoft{background:rgba(201,104,58,0.08);border:1px solid rgba(201,104,58,0.22);color:var(--terra2);border-radius:8px;padding:5px 13px;font-size:0.75rem;font-weight:500;}
+.subs{font-family:'Playfair Display',serif;font-weight:700;font-size:0.9rem;margin-bottom:0.6rem;color:var(--text);}
+.soclinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem}
+.socbtn{display:inline-flex;align-items:center;gap:7px;background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:9px 14px;font-size:0.77rem;font-weight:600;color:var(--text);text-decoration:none;cursor:pointer;transition:all 0.2s;}
+.socbtn:hover{border-color:var(--clay);color:var(--clay);transform:translateY(-2px);background:rgba(240,167,87,0.05)}
+.edu-list{display:flex;flex-direction:column;gap:10px;margin-top:0.8rem}
+.edu-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.3rem;display:flex;align-items:flex-start;gap:13px;transition:all 0.25s;}
+.edu-item:hover{border-color:rgba(240,167,87,0.28);box-shadow:0 6px 24px rgba(0,0,0,0.25)}
+.edu-ico{width:36px;height:36px;background:rgba(240,167,87,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.edu-deg{font-family:'Playfair Display',serif;font-weight:700;font-size:0.88rem;margin-bottom:2px}
+.edu-inst{font-size:0.76rem;color:var(--muted)}
+.edu-yr{font-size:0.72rem;color:var(--clay);margin-top:3px;font-weight:600;letter-spacing:0.2px}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.5rem 1.6rem 1.5rem 2.1rem;position:relative;overflow:hidden;transition:all 0.25s;margin-top:10px;}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,var(--clay),var(--terracotta));}
+.exp-card:hover{border-color:rgba(240,167,87,0.28);box-shadow:0 10px 32px rgba(0,0,0,0.28)}
+.exp-t{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem}
+.exp-c{font-size:0.78rem;color:var(--clay);margin:3px 0 9px}
+.exp-d{font-size:0.83rem;color:var(--text2);line-height:1.85}
+
+/* ===== PROJECTS ===== */
+.proj-filter{display:flex;gap:8px;flex-wrap:wrap;margin:1.8rem 0 0.5rem;}
+.pf-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:7px 18px;border-radius:50px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.22s;}
+.pf-btn:hover,.pf-btn.active{background:rgba(240,167,87,0.1);border-color:var(--clay);color:var(--clay);}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.3rem;margin-top:1.5rem;}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all 0.35s;cursor:default;}
+.pcard:hover{transform:translateY(-8px);border-color:rgba(240,167,87,0.32);box-shadow:0 28px 60px rgba(0,0,0,0.4),0 0 40px rgba(240,167,87,0.06);}
+.pthumb{height:145px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative;overflow:hidden;}
+/* Gradient variants */
+.pc1 .pthumb{background:linear-gradient(135deg,#201008,#2e1808)}
+.pc2 .pthumb{background:linear-gradient(135deg,#0e1810,#0a1206)}
+.pc3 .pthumb{background:linear-gradient(135deg,#1e0e10,#140606)}
+.pc4 .pthumb{background:linear-gradient(135deg,#1e1508,#130e02)}
+.pc5 .pthumb{background:linear-gradient(135deg,#0e1220,#080f1e)}
+.pc6 .pthumb{background:linear-gradient(135deg,#1e0810,#130408)}
+.pc7 .pthumb{background:linear-gradient(135deg,#0e1a0e,#081208)}
+.pc8 .pthumb{background:linear-gradient(135deg,#201808,#150f02)}
+.pc9 .pthumb{background:linear-gradient(135deg,#181020,#100815)}
+.pc10 .pthumb{background:linear-gradient(135deg,#1a1008,#100804)}
+.pglow{position:absolute;width:88px;height:88px;border-radius:50%;filter:blur(28px);}
+.pc1 .pglow{background:rgba(240,167,87,0.3)}
+.pc2 .pglow{background:rgba(168,197,160,0.25)}
+.pc3 .pglow{background:rgba(201,104,58,0.25)}
+.pc4 .pglow{background:rgba(245,200,120,0.25)}
+.pc5 .pglow{background:rgba(120,150,240,0.2)}
+.pc6 .pglow{background:rgba(220,100,120,0.22)}
+.pc7 .pglow{background:rgba(140,200,140,0.2)}
+.pc8 .pglow{background:rgba(245,180,80,0.25)}
+.pc9 .pglow{background:rgba(180,130,240,0.2)}
+.pc10 .pglow{background:rgba(240,167,87,0.22)}
+.pbody{padding:1.25rem}
+.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}
+.ptag{background:rgba(240,167,87,0.07);border:1px solid rgba(240,167,87,0.18);color:var(--clay);border-radius:50px;font-size:0.63rem;font-weight:700;padding:3px 9px;letter-spacing:0.3px;}
+.pname{font-family:'Playfair Display',serif;font-weight:700;font-size:1.02rem;margin-bottom:5px}
+.pdesc{font-size:0.8rem;color:var(--text2);line-height:1.8}
+.pfoot{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;border-top:1px solid var(--border);}
+.plink{font-size:0.77rem;color:var(--clay);font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;transition:all 0.2s;}
+.plink:hover{gap:10px}
+.pbadge{font-size:0.64rem;background:rgba(168,197,160,0.1);border:1px solid rgba(168,197,160,0.25);color:#a8c5a0;padding:3px 9px;border-radius:50px;font-weight:700;}
+
+/* ===== SKILLS ===== */
+.sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.3rem;margin-top:3rem;}
+.skcard{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.5rem;transition:all 0.28s;}
+.skcard:hover{border-color:rgba(240,167,87,0.22);transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,0.28)}
+.sk-ico{font-size:1.7rem;margin-bottom:10px}
+.sk-cat{font-family:'Playfair Display',serif;font-weight:700;font-size:0.92rem;margin-bottom:1.2rem;color:var(--text)}
+.bars{display:flex;flex-direction:column;gap:11px}
+.bhead{display:flex;justify-content:space-between;font-size:0.76rem;color:var(--text2);margin-bottom:5px}
+.bpct{color:var(--clay);font-weight:700;}
+.bbg{height:4px;background:rgba(255,255,255,0.05);border-radius:99px;overflow:hidden}
+.bfill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--clay),var(--terra2),var(--sand));width:0;transition:width 1.8s cubic-bezier(0.22,1,0.36,1);}
+.hobby-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.5rem}
+.hob{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 18px;display:flex;align-items:center;gap:9px;font-size:0.86rem;font-weight:500;transition:all 0.25s;}
+.hob:hover{border-color:rgba(240,167,87,0.32);color:var(--clay);transform:scale(1.05);background:rgba(240,167,87,0.05)}
+
+/* ===== CONTACT ===== */
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3.5rem;align-items:start;margin-top:3rem;}
+.ci-ttl{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:7px}
+.ci-sub{font-size:0.87rem;color:var(--text2);line-height:1.9;margin-bottom:1.5rem}
+.ci-items{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.cirow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 14px;transition:border-color 0.22s;text-decoration:none;color:inherit;}
+.cirow:hover{border-color:rgba(240,167,87,0.28);background:rgba(240,167,87,0.02)}
+.ci-ico{width:36px;height:36px;background:rgba(240,167,87,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.93rem;flex-shrink:0;}
+.ci-lbl{font-size:0.65rem;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:2px}
+.ci-val{font-size:0.83rem;font-weight:500;color:var(--text)}
+.hire-cta{background:linear-gradient(135deg,rgba(240,167,87,0.08),rgba(201,104,58,0.08));border:1px solid rgba(240,167,87,0.2);border-radius:20px;padding:1.6rem;margin-top:1.5rem;text-align:center;}
+.hire-cta-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.25rem;margin-bottom:6px;}
+.hire-cta-sub{font-size:0.81rem;color:var(--text2);margin-bottom:1.3rem;}
+.hire-cta-btns{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;}
+.wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#000;font-weight:700;font-size:0.81rem;padding:10px 20px;border-radius:50px;text-decoration:none;transition:all 0.25s;box-shadow:0 0 22px rgba(37,211,102,0.22);}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(37,211,102,0.38)}
+.call-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(240,167,87,0.1);color:var(--clay);border:1px solid rgba(240,167,87,0.3);font-weight:700;font-size:0.81rem;padding:10px 20px;border-radius:50px;text-decoration:none;transition:all 0.25s;}
+.call-btn:hover{transform:translateY(-2px);background:rgba(240,167,87,0.18)}
+.fbox{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2rem;}
+.fttl{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;margin-bottom:1.5rem}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg{margin-bottom:11px}
+.fg label{display:block;font-size:0.67rem;font-weight:700;letter-spacing:1px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;}
+.fg input,.fg textarea{width:100%;background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;outline:none;transition:all 0.22s;}
+.fg input:focus,.fg textarea:focus{border-color:var(--clay);box-shadow:0 0 0 3px rgba(240,167,87,0.1);background:rgba(240,167,87,0.025);}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--muted);font-size:0.81rem}
+.fg textarea{resize:vertical;min-height:105px}
+.subbtn{width:100%;background:linear-gradient(135deg,var(--clay),var(--terracotta));color:var(--warm-white);border:none;border-radius:12px;padding:14px;font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.25s;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.subbtn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(201,104,58,0.35)}
+.subbtn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.form-done{display:none;text-align:center;padding:2.5rem 1rem;}
+.form-done.show{display:block}
+.form-done .big{font-size:2.8rem;margin-bottom:0.8rem}
+.form-done p{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--clay)}
+.form-done small{font-size:0.82rem;color:var(--muted)}
+
+/* Floating particles */
+.particle{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
+@keyframes drift{
+  0%{transform:translateY(0) rotate(0deg);opacity:0}
+  10%{opacity:1}
+  90%{opacity:0.6}
+  100%{transform:translateY(-100vh) rotate(360deg);opacity:0}
+}
+
+footer{border-top:1px solid var(--border);padding:1.8rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.77rem;color:var(--muted);position:relative;z-index:1;}
+.flogo-wrap{display:flex;align-items:center;gap:8px;}
+.flogo-svg{width:28px;height:28px;}
+.flogo{font-family:'Playfair Display',serif;font-weight:700;font-size:0.9rem;color:var(--clay)}
+footer a{color:var(--text2);text-decoration:none;transition:color 0.2s;}
+footer a:hover{color:var(--clay)}
+#stb{position:fixed;bottom:1.8rem;right:1.8rem;width:42px;height:42px;background:linear-gradient(135deg,var(--clay),var(--terracotta));color:var(--warm-white);font-size:1.1rem;font-weight:700;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(201,104,58,0.35);opacity:0;transform:translateY(10px);pointer-events:none;transition:all 0.3s;z-index:300;}
+#stb.vis{opacity:1;transform:translateY(0);pointer-events:all}
+#stb:hover{transform:translateY(-3px) scale(1.08)}
+
+/* Shimmer animation for cards */
+@keyframes shimmer{
+  0%{background-position:-200% 0}
+  100%{background-position:200% 0}
+}
+
+@media(max-width:860px){
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .contact-grid{grid-template-columns:1fr;gap:2rem}
+  .f2{grid-template-columns:1fr}
+  .hero-decor{display:none!important}
+}
+@media(max-width:640px){
+  .navlinks{display:none}
+  .ham{display:flex}
+  .hero{padding:3rem 5% 4rem}
+  .hero-name{letter-spacing:-1.5px}
+  .hero-actions{flex-direction:column}
+  .btn-fill,.btn-line{justify-content:center}
+  .hstats{flex-direction:row;width:100%;justify-content:space-between}
+  .hs{padding:1rem;flex:1}
+  .hs .n{font-size:1.6rem}
+  .wrap{padding:3rem 5%}
+  .fbox{padding:1.4rem}
+  .proj-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;text-align:center;gap:0.6rem}
+}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="logo" onclick="go('home')">
+    <!-- Handcrafted YB Logo -->
+    <svg class="logo-svg" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lg1" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#f0a757"/>
+          <stop offset="60%" stop-color="#c9683a"/>
+          <stop offset="100%" stop-color="#e08934"/>
+        </linearGradient>
+        <linearGradient id="lg2" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#2a1a09"/>
+          <stop offset="100%" stop-color="#321f0a"/>
+        </linearGradient>
+      </defs>
+      <!-- Hexagon background -->
+      <path d="M21 2L38.3 11.5V30.5L21 40L3.7 30.5V11.5Z" fill="url(#lg2)" stroke="url(#lg1)" stroke-width="1.2"/>
+      <!-- Y letter -->
+      <path d="M11 13L17.5 21V29" stroke="url(#lg1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M24 13L17.5 21" stroke="url(#lg1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- B letter -->
+      <path d="M26 13V29" stroke="url(#lg1)" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M26 13H30.5C31.9 13 33 14.1 33 15.5V16.5C33 17.9 31.9 19 30.5 19H26" stroke="url(#lg1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M26 19H31C32.7 19 34 20.3 34 22V22C34 23.7 32.7 25 31 25H26" stroke="url(#lg1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="logo-text">Yashraj<em>Developer</em></div>
+  </div>
+  <ul class="navlinks">
+    <li><a id="nl-home" onclick="go('home')" class="act">Home</a></li>
+    <li><a id="nl-about" onclick="go('about')">About</a></li>
+    <li><a id="nl-projects" onclick="go('projects')">Projects</a></li>
+    <li><a id="nl-skills" onclick="go('skills')">Skills</a></li>
+    <li><a id="nl-contact" onclick="go('contact')">Contact</a></li>
+    <li>
+      <a href="https://wa.me/917573883279" target="_blank" class="hire-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.552 4.103 1.518 5.826L0 24l6.335-1.654A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.877 9.877 0 01-5.031-1.378l-.361-.214-3.741.979 1.001-3.654-.236-.375A9.844 9.844 0 012.118 12C2.118 6.539 6.539 2.118 12 2.118c5.461 0 9.882 4.421 9.882 9.882 0 5.461-4.421 9.882-9.882 9.882z"/></svg>
+        Hire Me
+      </a>
+    </li>
+  </ul>
+  <button class="ham" id="hambtn" onclick="toggleMob()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobnav" id="mobnav">
+  <a onclick="go('home');closeMob()">🏠 Home</a>
+  <a onclick="go('about');closeMob()">👤 About</a>
+  <a onclick="go('projects');closeMob()">💼 Projects</a>
+  <a onclick="go('skills');closeMob()">⚡ Skills</a>
+  <a onclick="go('contact');closeMob()">📬 Contact</a>
+  <a href="https://wa.me/917573883279" target="_blank" class="mob-hire">💬 Hire Me on WhatsApp</a>
+</div>
+
+<!-- ========== HOME ========== -->
+<div class="pg show" id="pg-home">
+  <section class="hero">
+    <div class="hero-decor" aria-hidden="true">
+      <div class="hd-ring hdr1"></div>
+      <div class="hd-ring hdr2"></div>
+      <div class="hd-ring hdr3"></div>
+      <div class="hd-center"><div class="hd-icon">⚡</div></div>
+      <div class="hd-dot hdd1"></div>
+      <div class="hd-dot hdd2"></div>
+      <div class="hd-dot hdd3"></div>
+    </div>
+    <div class="hero-inner">
+      <div class="status-pill fu"><div class="sdot"></div>Open to Opportunities</div>
+      <h1 class="hero-name">
+        Yashraj<br>
+        <span class="grad">Barad</span> <span class="dim">V.</span>
+      </h1>
+      <div class="typo-wrap fu d1">
+        <span id="typed" class="tw"></span><span class="cursor"></span>
+      </div>
+      <p class="hero-bio fu d2">A passionate developer from Ahmedabad crafting digital experiences — from pixel-perfect frontends to powerful automation workflows using n8n and WordPress. I turn ideas into beautiful, working products.</p>
+      <div class="hero-actions fu d3">
+        <button class="btn-fill" onclick="go('projects')">View Projects →</button>
+        <button class="btn-line" onclick="downloadCV()">⬇ Download CV</button>
+        <a href="https://wa.me/917573883279" target="_blank" class="hire-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.552 4.103 1.518 5.826L0 24l6.335-1.654A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.877 9.877 0 01-5.031-1.378l-.361-.214-3.741.979 1.001-3.654-.236-.375A9.844 9.844 0 012.118 12C2.118 6.539 6.539 2.118 12 2.118c5.461 0 9.882 4.421 9.882 9.882 0 5.461-4.421 9.882-9.882 9.882z"/></svg>
+          Hire Me
+        </a>
+      </div>
+      <div class="hstats fu d4">
+        <div class="hs"><span class="n" id="cnt1">0</span><span class="l">Projects Built</span></div>
+        <div class="hs"><span class="n" id="cnt2">0</span><span class="l">Skills</span></div>
+        <div class="hs"><span class="n" id="cnt3">0</span><span class="l">Months Exp.</span></div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="flogo-wrap">
+      <svg class="flogo-svg" viewBox="0 0 42 42" fill="none"><defs><linearGradient id="flg1" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#f0a757"/><stop offset="100%" stop-color="#c9683a"/></linearGradient><linearGradient id="flg2" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2a1a09"/><stop offset="100%" stop-color="#321f0a"/></linearGradient></defs><path d="M21 2L38.3 11.5V30.5L21 40L3.7 30.5V11.5Z" fill="url(#flg2)" stroke="url(#flg1)" stroke-width="1.2"/><path d="M11 13L17.5 21V29" stroke="url(#flg1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 13L17.5 21" stroke="url(#flg1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 13V29" stroke="url(#flg1)" stroke-width="2.2" stroke-linecap="round"/><path d="M26 13H30.5C31.9 13 33 14.1 33 15.5V16.5C33 17.9 31.9 19 30.5 19H26" stroke="url(#flg1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 19H31C32.7 19 34 20.3 34 22V22C34 23.7 32.7 25 31 25H26" stroke="url(#flg1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="flogo">Yashraj Barad V.</span>
+    </div>
+    <div>Ahmedabad, Gujarat 🇮🇳</div>
+    <div>© 2025 All rights reserved</div>
+  </footer>
+</div>
+
+<!-- ========== ABOUT ========== -->
+<div class="pg" id="pg-about">
+  <section class="wrap">
+    <div class="tag-label fu">About Me</div>
+    <h2 class="sec-h fu d1">The <span>developer</span><br>behind the work.</h2>
+    <div class="about-grid">
+      <div class="fu d1">
+        <div class="profile-card">
+          <div class="pc-top"><div class="av-ring"><div class="av-init">YB</div></div></div>
+          <div class="pc-body">
+            <div class="irow"><span class="ico">🎓</span><span class="k">Full Name</span><span class="v">Yashraj Barad V.</span></div>
+            <div class="irow"><span class="ico">🎂</span><span class="k">Date of Birth</span><span class="v">Sep 3, 2003</span></div>
+            <div class="irow"><span class="ico">📍</span><span class="k">Location</span><span class="v">Ahmedabad &amp; Rajkot</span></div>
+            <div class="irow"><span class="ico">🗣️</span><span class="k">Languages</span><span class="v">Eng, Hindi, Gujarati</span></div>
+            <div class="irow"><span class="ico">🇮🇳</span><span class="k">Nationality</span><span class="v">Indian</span></div>
+            <div class="irow"><span class="ico">💼</span><span class="k">Status</span><span class="v" style="color:#a8c5a0">Employed ✓</span></div>
+          </div>
+        </div>
+        <div class="soclinks">
+          <a class="socbtn" href="https://www.linkedin.com/in/yashraj-barad-523001206" target="_blank">🔗 LinkedIn</a>
+          <a class="socbtn" href="https://github.com/yashrajbarad" target="_blank">🐙 GitHub</a>
+          <a class="socbtn" href="mailto:yashrajbarad03@gmail.com">✉️ Email</a>
+          <a class="socbtn" href="https://wa.me/917573883279" target="_blank" style="border-color:rgba(37,211,102,0.3);color:#a8c5a0;">💬 WhatsApp</a>
+          <a class="socbtn" href="https://www.instagram.com/yashrajbarad_/" target="_blank">📸 Instagram</a>
+          <a class="socbtn" href="https://in.pinterest.com/yashbarad39/" target="_blank">📌 Pinterest</a>
+        </div>
+      </div>
+      <div class="about-r fu d2">
+        <p>I'm <span class="hl">Yashraj Barad V.</span>, a BCA graduate from GLS University, Ahmedabad. Currently working as an <span class="hl">Automation Developer at Vertical Infonet Pvt</span>, I build smart automation workflows and manage WordPress websites for clients.</p>
+        <p>I'm passionate about creating clean, responsive web interfaces with React.js, and solving complex problems through automation using <span class="hl">n8n</span>. My MERN stack experience lets me build complete end-to-end digital solutions.</p>
+        <p>Outside coding, I love cricket and badminton — sports that keep me sharp, focused, and team-oriented.</p>
+        <div class="hr"></div>
+        <div class="subs">Technical Skills</div>
+        <div class="tag-row">
+          <span class="ttech">HTML5</span><span class="ttech">CSS3</span><span class="ttech">JavaScript</span><span class="ttech">React.js</span><span class="ttech">Tailwind CSS</span><span class="ttech">MySQL</span><span class="ttech">MongoDB</span><span class="ttech">WordPress</span><span class="ttech">n8n Automation</span><span class="ttech">MERN Stack</span><span class="ttech">Meta WhatsApp API</span><span class="ttech">PostgreSQL</span>
+        </div>
+        <div class="hr"></div>
+        <div class="subs">Soft Skills</div>
+        <div class="tag-row">
+          <span class="tsoft">Teamwork</span><span class="tsoft">Adaptability</span><span class="tsoft">Quick Learner</span><span class="tsoft">Active Listening</span><span class="tsoft">Problem Solving</span>
+        </div>
+        <div class="hr"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="https://wa.me/917573883279" target="_blank" class="wa-btn">💬 Chat on WhatsApp</a>
+          <a href="tel:+917573883279" class="call-btn">📞 Call Me</a>
+        </div>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="tag-label reveal">Experience</div>
+    <h3 class="sec-h reveal" style="font-size:1.55rem">Work <span>History</span></h3>
+    <div class="exp-card reveal">
+      <div class="exp-t">Automation Developer</div>
+      <div class="exp-c">Vertical Infonet Pvt · September 2025 – Present</div>
+      <div class="exp-d">Building process automations using n8n for workflow integration across multiple platforms. Developing and managing WordPress-based websites including plugin customization, theme development, and site performance optimization. Working with clients to automate repetitive tasks and streamline business operations using WhatsApp API integrations and multi-channel messaging systems.</div>
+    </div>
+    <div class="hr"></div>
+    <div class="tag-label reveal">Education</div>
+    <h3 class="sec-h reveal" style="font-size:1.55rem">Academic <span>Journey</span></h3>
+    <div class="edu-list">
+      <div class="edu-item reveal">
+        <div class="edu-ico">🎓</div>
+        <div><div class="edu-deg">Bachelor of Computer Applications (BCA)</div><div class="edu-inst">GLS University, Ahmedabad</div><div class="edu-yr">Passed 2025 · CGPA: 7.1</div></div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-ico">📗</div>
+        <div><div class="edu-deg">Higher Secondary Certificate (H.S.C)</div><div class="edu-inst">Dholakiya School, Rajkot · GSEB Board</div><div class="edu-yr">Passed 2022 · 69.14%</div></div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-ico">📘</div>
+        <div><div class="edu-deg">Secondary School Certificate (S.S.C)</div><div class="edu-inst">New Era School, Rajkot · GSEB Board</div><div class="edu-yr">Passed 2020 · 60%</div></div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="flogo-wrap"><svg class="flogo-svg" viewBox="0 0 42 42" fill="none"><defs><linearGradient id="flg3" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#f0a757"/><stop offset="100%" stop-color="#c9683a"/></linearGradient><linearGradient id="flg4" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2a1a09"/><stop offset="100%" stop-color="#321f0a"/></linearGradient></defs><path d="M21 2L38.3 11.5V30.5L21 40L3.7 30.5V11.5Z" fill="url(#flg4)" stroke="url(#flg3)" stroke-width="1.2"/><path d="M11 13L17.5 21V29" stroke="url(#flg3)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 13L17.5 21" stroke="url(#flg3)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 13V29" stroke="url(#flg3)" stroke-width="2.2" stroke-linecap="round"/><path d="M26 13H30.5C31.9 13 33 14.1 33 15.5V16.5C33 17.9 31.9 19 30.5 19H26" stroke="url(#flg3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 19H31C32.7 19 34 20.3 34 22V22C34 23.7 32.7 25 31 25H26" stroke="url(#flg3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="flogo">Yashraj Barad V.</span></div><div>Ahmedabad, Gujarat 🇮🇳</div><div>© 2025 All rights reserved</div></footer>
+</div>
+
+<!-- ========== PROJECTS ========== -->
+<div class="pg" id="pg-projects">
+  <section class="wrap">
+    <div class="tag-label fu">My Work</div>
+    <h2 class="sec-h fu d1">Featured <span>Projects</span></h2>
+    <p class="sec-p fu d2">From automation platforms to full-stack apps and client websites — real projects, real impact.</p>
+
+    <div class="proj-filter fu d2" id="proj-filter">
+      <button class="pf-btn active" data-cat="all">All</button>
+      <button class="pf-btn" data-cat="automation">Automation</button>
+      <button class="pf-btn" data-cat="web">Web Dev</button>
+      <button class="pf-btn" data-cat="fullstack">Full Stack</button>
+      <button class="pf-btn" data-cat="client">Client Work</button>
+    </div>
+
+    <div class="proj-grid" id="projgrid">
+
+      <!-- Project 1 -->
+      <div class="pcard pc1 reveal" data-cat="automation">
+        <div class="pthumb"><div class="pglow"></div>📨</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">n8n</span><span class="ptag">Meta API</span><span class="ptag">Evolution API</span></div>
+          <div class="pname">Bulk Messaging Automation</div>
+          <div class="pdesc">Automated bulk WhatsApp messaging system using n8n with Official Meta API and unofficial Evolution API. Scalable, reliable workflow for high-volume client messaging needs.</div>
+        </div>
+        <div class="pfoot"><span class="pbadge">✅ Live</span><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View Details →</a></div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="pcard pc2 reveal" data-cat="automation fullstack">
+        <div class="pthumb"><div class="pglow"></div>📊</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">React.js</span><span class="ptag">n8n</span><span class="ptag">PostgreSQL</span><span class="ptag">Meta API</span></div>
+          <div class="pname">WhatsApp Bulk Platform</div>
+          <div class="pdesc">Full-stack platform for Excel-based bulk messaging. Users upload customer sheets, filter recipients, and send Text/Image/PDF messages via WhatsApp with full message logs.</div>
+        </div>
+        <div class="pfoot"><span class="pbadge">✅ Live</span><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View Details →</a></div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="pcard pc3 reveal" data-cat="automation">
+        <div class="pthumb"><div class="pglow"></div>📋</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">n8n</span><span class="ptag">Excel</span><span class="ptag">PDF Gen</span><span class="ptag">Meta API</span></div>
+          <div class="pname">Coupon & Policy Automation</div>
+          <div class="pdesc">Daily automated coupon and policy distribution with dynamic PDF generation based on customer logic. Excel-driven system with zero manual intervention needed.</div>
+        </div>
+        <div class="pfoot"><span class="pbadge">✅ Live</span><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View Details →</a></div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="pcard pc4 reveal" data-cat="automation">
+        <div class="pthumb"><div class="pglow"></div>📝</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">Google Forms</span><span class="ptag">n8n</span><span class="ptag">WhatsApp</span><span class="ptag">Telegram</span><span class="ptag">Email</span></div>
+          <div class="pname">Google Form Multi-Channel Bot</div>
+          <div class="pdesc">Form submission triggers automated messages across WhatsApp, Telegram, Email, and SMS simultaneously. Real-time data processing with zero manual effort.</div>
+        </div>
+        <div class="pfoot"><span class="pbadge">✅ Live</span><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View Details →</a></div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="pcard pc5 reveal" data-cat="automation">
+        <div class="pthumb"><div class="pglow"></div>🍽️</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">Google Forms</span><span class="ptag">Google Sheets</span><span class="ptag">n8n</span><span class="ptag">WhatsApp API</span></div>
+          <div class="pname">QR Feedback & Lead System</div>
+          <div class="pdesc">QR-based customer feedback system for restaurants/cafes. Auto-sends discount coupons via WhatsApp on form submission. Drives repeat customers and lead generation.</div>
+        </div>
+        <div class="pfoot"><span class="pbadge">✅ Live</span><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View Details →</a></div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="pcard pc6 reveal" data-cat="automation">
+        <div class="pthumb"><div class="pglow"></div>🤖</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">Telegram Bot</span><span class="ptag">n8n</span><span class="ptag">WhatsApp</span><span class="ptag">Excel</span></div>
+          <div class="pname">Telegram AI Booking Agent</div>
+          <div class="pdesc">AI-style Telegram chatbot for appointment booking with smart conversation flow. Auto-confirms bookings and sends WhatsApp notifications — fully hands-free.</div>
+        </div>
+        <div class="pfoot"><span class="pbadge">✅ Live</span><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View Details →</a></div>
+      </div>
+
+      <!-- Project 7 -->
+      <div class="pcard pc7 reveal" data-cat="client web">
+        <div class="pthumb"><div class="pglow"></div>🚛</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">WordPress</span><span class="ptag">SEO</span><span class="ptag">Lead Gen</span></div>
+          <div class="pname">Towing Company Website</div>
+          <div class="pdesc">Business website for a towing company (NJ, USA) with on-page SEO optimization for better search visibility and lead generation. Fully deployed and live.</div>
+        </div>
+        <div class="pfoot"><a class="plink" href="https://wecaretransportnj.com" target="_blank">wecaretransportnj.com →</a></div>
+      </div>
+
+      <!-- Project 8 -->
+      <div class="pcard pc8 reveal" data-cat="client web">
+        <div class="pthumb"><div class="pglow"></div>📷</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span><span class="ptag">Responsive</span></div>
+          <div class="pname">Camera Service Website</div>
+          <div class="pdesc">Custom-coded fully responsive website for a camera service company. Built from scratch with pure HTML/CSS/JS — fast performance and clean design. Live in production.</div>
+        </div>
+        <div class="pfoot"><a class="plink" href="https://snpus.com" target="_blank">snpus.com →</a></div>
+      </div>
+
+      <!-- Project 9 -->
+      <div class="pcard pc9 reveal" data-cat="automation fullstack">
+        <div class="pthumb"><div class="pglow"></div>🚗</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">Web App</span><span class="ptag">n8n</span><span class="ptag">Meta API</span><span class="ptag">Multi-Module</span></div>
+          <div class="pname">Excel → WhatsApp Platform</div>
+          <div class="pdesc">Secure 5-module web platform: Insurance Expiry, Sales Campaign, Service Due, Walk-in Offers, Service Promo. Login-protected, Excel upload, real-time WhatsApp messaging.</div>
+        </div>
+        <div class="pfoot"><span class="pbadge">✅ Live</span><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View Details →</a></div>
+      </div>
+
+      <!-- Project 10 -->
+      <div class="pcard pc10 reveal" data-cat="automation">
+        <div class="pthumb"><div class="pglow"></div>🍕</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">AI Chatbot</span><span class="ptag">n8n</span><span class="ptag">WhatsApp</span><span class="ptag">Web</span></div>
+          <div class="pname">Restaurant AI Chatbot</div>
+          <div class="pdesc">AI-powered chatbot for restaurant customer interaction — handles queries, menu, offers, and basic engagement automatically. Instant responses for better customer experience.</div>
+        </div>
+        <div class="pfoot"><span class="pbadge">✅ Live</span><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View Details →</a></div>
+      </div>
+
+      <!-- Original Projects -->
+      <div class="pcard pc1 reveal" data-cat="web fullstack">
+        <div class="pthumb"><div class="pglow"></div>💼</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">React.js</span><span class="ptag">HTML</span><span class="ptag">CSS</span></div>
+          <div class="pname">Personal Portfolio</div>
+          <div class="pdesc">Dynamic personal portfolio built with React.js showcasing skills and projects with smooth interactions and clean layout across all devices.</div>
+        </div>
+        <div class="pfoot"><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View on GitHub →</a></div>
+      </div>
+
+      <div class="pcard pc2 reveal" data-cat="web">
+        <div class="pthumb"><div class="pglow"></div>🎵</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">React.js</span><span class="ptag">Tailwind CSS</span></div>
+          <div class="pname">Spotify Clone</div>
+          <div class="pdesc">Feature-rich Spotify clone replicating music streaming with playlist browsing, playback interface, and real-time data fetching with a polished UX.</div>
+        </div>
+        <div class="pfoot"><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View on GitHub →</a></div>
+      </div>
+
+      <div class="pcard pc4 reveal" data-cat="fullstack">
+        <div class="pthumb"><div class="pglow"></div>🐾</div>
+        <div class="pbody">
+          <div class="ptags"><span class="ptag">MongoDB</span><span class="ptag">Express</span><span class="ptag">React.js</span><span class="ptag">Node.js</span></div>
+          <div class="pname">Pet Adoption Platform</div>
+          <div class="pdesc">Full-stack MERN platform for pet adoption — browse pets, submit adoption requests, donate, and view detailed profiles with vaccination records.</div>
+        </div>
+        <div class="pfoot"><a class="plink" href="https://github.com/yashrajbarad" target="_blank">View on GitHub →</a></div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://github.com/yashrajbarad" target="_blank" class="btn-fill">🐙 See All on GitHub</a>
+      <a href="https://wa.me/917573883279?text=Hi%20Yashraj%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project!" target="_blank" class="wa-btn">💬 Discuss a Project</a>
+    </div>
+  </section>
+  <footer><div class="flogo-wrap"><svg class="flogo-svg" viewBox="0 0 42 42" fill="none"><defs><linearGradient id="flg5" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#f0a757"/><stop offset="100%" stop-color="#c9683a"/></linearGradient><linearGradient id="flg6" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2a1a09"/><stop offset="100%" stop-color="#321f0a"/></linearGradient></defs><path d="M21 2L38.3 11.5V30.5L21 40L3.7 30.5V11.5Z" fill="url(#flg6)" stroke="url(#flg5)" stroke-width="1.2"/><path d="M11 13L17.5 21V29" stroke="url(#flg5)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 13L17.5 21" stroke="url(#flg5)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 13V29" stroke="url(#flg5)" stroke-width="2.2" stroke-linecap="round"/><path d="M26 13H30.5C31.9 13 33 14.1 33 15.5V16.5C33 17.9 31.9 19 30.5 19H26" stroke="url(#flg5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 19H31C32.7 19 34 20.3 34 22V22C34 23.7 32.7 25 31 25H26" stroke="url(#flg5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="flogo">Yashraj Barad V.</span></div><div>Ahmedabad, Gujarat 🇮🇳</div><div>© 2025 All rights reserved</div></footer>
+</div>
+
+<!-- ========== SKILLS ========== -->
+<div class="pg" id="pg-skills">
+  <section class="wrap">
+    <div class="tag-label fu">Expertise</div>
+    <h2 class="sec-h fu d1">Skills &amp; <span>Technologies</span></h2>
+    <p class="sec-p fu d2">A well-rounded mix of frontend, backend, automation, and interpersonal skills built through real client work and academic projects.</p>
+    <div class="sk-grid" id="skgrid">
+      <div class="skcard fu d1">
+        <div class="sk-ico">🎨</div>
+        <div class="sk-cat">Frontend Development</div>
+        <div class="bars">
+          <div><div class="bhead"><span>HTML5</span><span class="bpct">90%</span></div><div class="bbg"><div class="bfill" data-w="90"></div></div></div>
+          <div><div class="bhead"><span>CSS3</span><span class="bpct">87%</span></div><div class="bbg"><div class="bfill" data-w="87"></div></div></div>
+          <div><div class="bhead"><span>Tailwind CSS</span><span class="bpct">80%</span></div><div class="bbg"><div class="bfill" data-w="80"></div></div></div>
+          <div><div class="bhead"><span>React.js</span><span class="bpct">75%</span></div><div class="bbg"><div class="bfill" data-w="75"></div></div></div>
+          <div><div class="bhead"><span>JavaScript</span><span class="bpct">75%</span></div><div class="bbg"><div class="bfill" data-w="75"></div></div></div>
+        </div>
+      </div>
+      <div class="skcard fu d2">
+        <div class="sk-ico">🖥️</div>
+        <div class="sk-cat">Backend &amp; Database</div>
+        <div class="bars">
+          <div><div class="bhead"><span>MySQL</span><span class="bpct">70%</span></div><div class="bbg"><div class="bfill" data-w="70"></div></div></div>
+          <div><div class="bhead"><span>MongoDB</span><span class="bpct">68%</span></div><div class="bbg"><div class="bfill" data-w="68"></div></div></div>
+          <div><div class="bhead"><span>PostgreSQL</span><span class="bpct">65%</span></div><div class="bbg"><div class="bfill" data-w="65"></div></div></div>
+          <div><div class="bhead"><span>Node.js (MERN)</span><span class="bpct">62%</span></div><div class="bbg"><div class="bfill" data-w="62"></div></div></div>
+        </div>
+      </div>
+      <div class="skcard fu d1">
+        <div class="sk-ico">⚡</div>
+        <div class="sk-cat">Automation &amp; APIs</div>
+        <div class="bars">
+          <div><div class="bhead"><span>n8n Automation</span><span class="bpct">85%</span></div><div class="bbg"><div class="bfill" data-w="85"></div></div></div>
+          <div><div class="bhead"><span>Meta WhatsApp API</span><span class="bpct">80%</span></div><div class="bbg"><div class="bfill" data-w="80"></div></div></div>
+          <div><div class="bhead"><span>Evolution API</span><span class="bpct">75%</span></div><div class="bbg"><div class="bfill" data-w="75"></div></div></div>
+          <div><div class="bhead"><span>Telegram Bot</span><span class="bpct">70%</span></div><div class="bbg"><div class="bfill" data-w="70"></div></div></div>
+        </div>
+      </div>
+      <div class="skcard fu d2">
+        <div class="sk-ico">🌐</div>
+        <div class="sk-cat">CMS &amp; Web</div>
+        <div class="bars">
+          <div><div class="bhead"><span>WordPress</span><span class="bpct">80%</span></div><div class="bbg"><div class="bfill" data-w="80"></div></div></div>
+          <div><div class="bhead"><span>Plugin Dev</span><span class="bpct">72%</span></div><div class="bbg"><div class="bfill" data-w="72"></div></div></div>
+          <div><div class="bhead"><span>On-page SEO</span><span class="bpct">68%</span></div><div class="bbg"><div class="bfill" data-w="68"></div></div></div>
+        </div>
+      </div>
+      <div class="skcard fu d1">
+        <div class="sk-ico">🤝</div>
+        <div class="sk-cat">Soft Skills</div>
+        <div class="bars">
+          <div><div class="bhead"><span>Quick Learner</span><span class="bpct">95%</span></div><div class="bbg"><div class="bfill" data-w="95"></div></div></div>
+          <div><div class="bhead"><span>Teamwork</span><span class="bpct">92%</span></div><div class="bbg"><div class="bfill" data-w="92"></div></div></div>
+          <div><div class="bhead"><span>Problem Solving</span><span class="bpct">90%</span></div><div class="bbg"><div class="bfill" data-w="90"></div></div></div>
+          <div><div class="bhead"><span>Adaptability</span><span class="bpct">88%</span></div><div class="bbg"><div class="bfill" data-w="88"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hr"></div>
+    <div class="tag-label">Hobbies</div>
+    <h3 class="sec-h" style="font-size:1.45rem">What I <span>Love Doing</span></h3>
+    <div class="hobby-row">
+      <div class="hob">🏏 Cricket</div>
+      <div class="hob">🏸 Badminton</div>
+      <div class="hob">🎵 Listening to Music</div>
+      <div class="hob">💻 Building Projects</div>
+      <div class="hob">⚡ Automation</div>
+    </div>
+  </section>
+  <footer><div class="flogo-wrap"><svg class="flogo-svg" viewBox="0 0 42 42" fill="none"><defs><linearGradient id="flg7" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#f0a757"/><stop offset="100%" stop-color="#c9683a"/></linearGradient><linearGradient id="flg8" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2a1a09"/><stop offset="100%" stop-color="#321f0a"/></linearGradient></defs><path d="M21 2L38.3 11.5V30.5L21 40L3.7 30.5V11.5Z" fill="url(#flg8)" stroke="url(#flg7)" stroke-width="1.2"/><path d="M11 13L17.5 21V29" stroke="url(#flg7)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 13L17.5 21" stroke="url(#flg7)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 13V29" stroke="url(#flg7)" stroke-width="2.2" stroke-linecap="round"/><path d="M26 13H30.5C31.9 13 33 14.1 33 15.5V16.5C33 17.9 31.9 19 30.5 19H26" stroke="url(#flg7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 19H31C32.7 19 34 20.3 34 22V22C34 23.7 32.7 25 31 25H26" stroke="url(#flg7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="flogo">Yashraj Barad V.</span></div><div>Ahmedabad, Gujarat 🇮🇳</div><div>© 2025 All rights reserved</div></footer>
+</div>
+
+<!-- ========== CONTACT ========== -->
+<div class="pg" id="pg-contact">
+  <section class="wrap">
+    <div class="tag-label fu">Get In Touch</div>
+    <h2 class="sec-h fu d1">Let's <span>Connect</span> &amp;<br>Build Something Great.</h2>
+    <div class="contact-grid">
+      <div class="fu d1">
+        <div class="ci-ttl">Contact Information</div>
+        <div class="ci-sub">Open to freelance work, full-time roles, and collaborations. Send me a message and I'll reply within 24 hours!</div>
+        <div class="ci-items">
+          <a class="cirow" href="mailto:yashrajbarad03@gmail.com">
+            <div class="ci-ico">📧</div>
+            <div><div class="ci-lbl">Email</div><div class="ci-val">yashrajbarad03@gmail.com</div></div>
+          </a>
+          <a class="cirow" href="tel:+917573883279">
+            <div class="ci-ico">📱</div>
+            <div><div class="ci-lbl">Phone</div><div class="ci-val">+91 7573883279</div></div>
+          </a>
+          <div class="cirow">
+            <div class="ci-ico">📍</div>
+            <div><div class="ci-lbl">Location</div><div class="ci-val">Ahmedabad &amp; Rajkot, Gujarat</div></div>
+          </div>
+        </div>
+        <div class="hire-cta">
+          <div class="hire-cta-title">Ready to Work Together? 🚀</div>
+          <div class="hire-cta-sub">Reach me directly via WhatsApp or give me a call</div>
+          <div class="hire-cta-btns">
+            <a href="https://wa.me/917573883279?text=Hi%20Yashraj%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20hire%20you!" target="_blank" class="wa-btn">💬 WhatsApp Me</a>
+            <a href="tel:+917573883279" class="call-btn">📞 Call Now</a>
+          </div>
+        </div>
+        <div class="ci-ttl" style="margin:1.5rem 0 8px">Social Links</div>
+        <div class="soclinks">
+          <a class="socbtn" href="https://www.linkedin.com/in/yashraj-barad-523001206" target="_blank">🔗 LinkedIn</a>
+          <a class="socbtn" href="https://github.com/yashrajbarad" target="_blank">🐙 GitHub</a>
+          <a class="socbtn" href="mailto:yashrajbarad03@gmail.com">✉️ Email Me</a>
+          <a class="socbtn" href="https://www.instagram.com/yashrajbarad_/" target="_blank">📸 Instagram</a>
+          <a class="socbtn" href="https://in.pinterest.com/yashbarad39/" target="_blank">📌 Pinterest</a>
+        </div>
+        <div style="margin-top:1.5rem">
+          <button class="btn-fill" onclick="downloadCV()">⬇ Download CV</button>
+        </div>
+      </div>
+      <div class="fu d2">
+        <div class="fbox">
+          <div class="fttl">Send a Message 💬</div>
+          <div class="form-done" id="fdone">
+            <div class="big">✅</div>
+            <p>Message Sent Successfully!</p>
+            <small>I'll get back to you within 24 hours.</small>
+          </div>
+          <form id="cform" onsubmit="sendForm(event)">
+            <div class="f2">
+              <div class="fg"><label>First Name</label><input type="text" placeholder="John" required></div>
+              <div class="fg"><label>Last Name</label><input type="text" placeholder="Doe" required></div>
+            </div>
+            <div class="fg"><label>Email Address</label><input type="email" placeholder="john@example.com" required></div>
+            <div class="fg"><label>Phone (Optional)</label><input type="tel" placeholder="+91 XXXXXXXXXX"></div>
+            <div class="fg"><label>Subject</label><input type="text" placeholder="Project inquiry / Job offer..." required></div>
+            <div class="fg"><label>Message</label><textarea placeholder="Tell me about your project or opportunity..." required></textarea></div>
+            <button type="submit" class="subbtn" id="sbtn">
+              <span>Send Message</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="flogo-wrap"><svg class="flogo-svg" viewBox="0 0 42 42" fill="none"><defs><linearGradient id="flg9" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#f0a757"/><stop offset="100%" stop-color="#c9683a"/></linearGradient><linearGradient id="flg10" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2a1a09"/><stop offset="100%" stop-color="#321f0a"/></linearGradient></defs><path d="M21 2L38.3 11.5V30.5L21 40L3.7 30.5V11.5Z" fill="url(#flg10)" stroke="url(#flg9)" stroke-width="1.2"/><path d="M11 13L17.5 21V29" stroke="url(#flg9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 13L17.5 21" stroke="url(#flg9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 13V29" stroke="url(#flg9)" stroke-width="2.2" stroke-linecap="round"/><path d="M26 13H30.5C31.9 13 33 14.1 33 15.5V16.5C33 17.9 31.9 19 30.5 19H26" stroke="url(#flg9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 19H31C32.7 19 34 20.3 34 22V22C34 23.7 32.7 25 31 25H26" stroke="url(#flg9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="flogo">Yashraj Barad V.</span></div><div>Ahmedabad, Gujarat 🇮🇳</div><div>© 2025 All rights reserved</div></footer>
+</div>
+
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+var PAGES = ['home','about','projects','skills','contact'];
+
+function go(page) {
+  PAGES.forEach(function(p) {
+    var el = document.getElementById('pg-' + p);
+    if (el) { el.classList.remove('show'); el.classList.remove('enter'); }
+    var nl = document.getElementById('nl-' + p);
+    if (nl) nl.classList.remove('act');
+  });
+  var tgt = document.getElementById('pg-' + page);
+  if (tgt) {
+    tgt.classList.add('show');
+    void tgt.offsetWidth;
+    tgt.classList.add('enter');
+    setTimeout(function(){ tgt.classList.remove('enter'); }, 500);
+  }
+  var ntgt = document.getElementById('nl-' + page);
+  if (ntgt) ntgt.classList.add('act');
+  window.scrollTo(0, 0);
+  if (page === 'skills') { bDone = false; setTimeout(animBars, 350); }
+  // trigger reveals
+  setTimeout(initReveal, 100);
+}
+
+// Scroll & nav
+window.addEventListener('scroll', function(){
+  var nav = document.getElementById('main-nav');
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  document.getElementById('stb').classList.toggle('vis', window.scrollY > 300);
+  revealOnScroll();
+});
+
+function toggleMob() {
+  document.getElementById('hambtn').classList.toggle('open');
+  document.getElementById('mobnav').classList.toggle('open');
+}
+function closeMob() {
+  document.getElementById('hambtn').classList.remove('open');
+  document.getElementById('mobnav').classList.remove('open');
+}
+
+// Typewriter
+var ROLES = ['Automation Developer','Frontend Developer','React.js Developer','WordPress Developer','MERN Stack Developer','n8n Expert'];
+var ri = 0, ci = 0, del = false, typing = false;
+function startType() {
+  if (typing) return;
+  typing = true;
+  var el = document.getElementById('typed');
+  if (!el) return;
+  function tick() {
+    var cur = ROLES[ri];
+    if (!del) {
+      ci++;
+      el.textContent = cur.slice(0, ci);
+      if (ci === cur.length) { del = true; setTimeout(tick, 1800); return; }
+    } else {
+      ci--;
+      el.textContent = cur.slice(0, ci);
+      if (ci === 0) { del = false; ri = (ri + 1) % ROLES.length; }
+    }
+    setTimeout(tick, del ? 38 : 76);
+  }
+  tick();
+}
+
+// Counters
+function runCounter(id, target, suf) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var v = 0;
+  var steps = 60;
+  var timer = setInterval(function(){
+    v++;
+    el.textContent = v + suf;
+    if (v >= target) clearInterval(timer);
+  }, 1000 / steps);
+}
+
+// Skill bars
+var bDone = false;
+function animBars() {
+  if (bDone) return;
+  bDone = true;
+  var fills = document.querySelectorAll('.bfill');
+  fills.forEach(function(f, idx){
+    setTimeout(function(){
+      f.style.width = (f.getAttribute('data-w') || 50) + '%';
+    }, idx * 90);
+  });
+}
+
+// Scroll reveal
+function revealOnScroll() {
+  var els = document.querySelectorAll('.pg.show .reveal');
+  els.forEach(function(el){
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) {
+      el.classList.add('visible');
+    }
+  });
+}
+function initReveal() {
+  revealOnScroll();
+}
+
+// Project filter
+document.getElementById('proj-filter') && document.getElementById('proj-filter').addEventListener('click', function(e){
+  var btn = e.target.closest('.pf-btn');
+  if (!btn) return;
+  document.querySelectorAll('.pf-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var cat = btn.getAttribute('data-cat');
+  document.querySelectorAll('.pcard').forEach(function(card){
+    if (cat === 'all') {
+      card.style.display = '';
+    } else {
+      var cardCat = card.getAttribute('data-cat') || '';
+      card.style.display = cardCat.indexOf(cat) !== -1 ? '' : 'none';
+    }
+  });
+});
+
+// Form
+function sendForm(e) {
+  e.preventDefault();
+  var btn = document.getElementById('sbtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>Sending...</span>';
+  var inputs = e.target.querySelectorAll('input,textarea');
+  var fd = {
+    firstName: inputs[0].value, lastName: inputs[1].value,
+    email: inputs[2].value, phone: inputs[3].value,
+    subject: inputs[4].value, message: inputs[5].value,
+    ts: new Date().toISOString()
+  };
+  var WH = 'http://localhost:5678/webhook-test/portfolio';
+  fetch(WH, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(fd), mode:'no-cors' })
+    .catch(function(){})
+    .finally(function(){
+      document.getElementById('cform').style.display = 'none';
+      document.getElementById('fdone').classList.add('show');
+    });
+}
+
+// CV Download
+function downloadCV() {
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Yashraj Barad V. - Resume</title><style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 20px;color:#1a1008;line-height:1.65;background:#fdfaf6}h1{font-size:2.1rem;margin-bottom:4px;color:#c9683a}sub{display:block;color:#3a2010;font-weight:600;font-size:1rem;margin-bottom:6px;font-style:normal}.meta{font-size:0.84rem;color:#5a3818;margin-bottom:4px}.lnks{font-size:0.83rem;margin-bottom:22px}.lnks a{color:#c9683a;margin-right:16px;text-decoration:none}h2{font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#c9683a;border-bottom:2px solid #f0a757;padding-bottom:3px;margin-top:26px;margin-bottom:12px}.row{display:flex;justify-content:space-between;font-weight:700;font-size:0.88rem;margin-bottom:3px}.sm{font-size:0.78rem;color:#7a5030;margin-bottom:5px}p,li{font-size:0.84rem;color:#4a2e14;margin:3px 0;line-height:1.65}.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.tag{background:#fef3e0;border:1px solid #e08934;color:#7a3810;padding:2px 10px;border-radius:20px;font-size:0.74rem}@media print{body{margin:20px}}</style></head><body>';
+  html += '<h1>Yashraj Barad V.</h1><sub>Automation Developer | Frontend Developer | MERN Stack | n8n Expert</sub>';
+  html += '<div class="meta">📧 yashrajbarad03@gmail.com &nbsp;|&nbsp; 📱 +91 7573883279 &nbsp;|&nbsp; 📍 Ahmedabad &amp; Rajkot, Gujarat</div>';
+  html += '<div class="lnks"><a href="https://www.linkedin.com/in/yashraj-barad-523001206">LinkedIn</a><a href="https://github.com/yashrajbarad">GitHub</a><a href="https://wa.me/917573883279">WhatsApp</a><a href="https://wecaretransportnj.com">Client Site 1</a><a href="https://snpus.com">Client Site 2</a></div>';
+  html += '<h2>Career Objective</h2><p>To work in an environment that encourages me to succeed and grow professionally, where I can utilize my skills in automation, web development, and problem-solving to create real business value.</p>';
+  html += '<h2>Experience</h2><div class="row"><span>Automation Developer — Vertical Infonet Pvt</span><span>Sep 2025 – Present</span></div><div class="sm">Ahmedabad, Gujarat</div>';
+  html += '<p>• Built n8n automation workflows for WhatsApp bulk messaging using Meta Official API & Evolution API.</p><p>• Developed multi-module web platform for Excel-to-WhatsApp automation (5 business modules).</p><p>• Managed and deployed WordPress websites including SEO optimization for US-based clients.</p><p>• Created AI-style chatbots for Telegram and WhatsApp for restaurant and service businesses.</p><p>• Implemented QR-based feedback systems and Google Form multi-channel automation.</p>';
+  html += '<h2>Projects</h2>';
+  html += '<div class="row"><span>Bulk WhatsApp Messaging Platform</span><span>React + n8n + PostgreSQL + Meta API</span></div><p>Excel-based full-stack platform with filtering, message logs, and multi-format messaging.</p>';
+  html += '<div class="row"><span>Excel → WhatsApp Multi-Module System</span><span>Web App + n8n + Meta API</span></div><p>5-module secure platform: Insurance, Sales, Service, Walk-in, Promotion campaigns.</p>';
+  html += '<div class="row"><span>Towing Company Website</span><span>WordPress + SEO</span></div><p>Live: wecaretransportnj.com — Business site with on-page SEO for lead generation.</p>';
+  html += '<div class="row"><span>Camera Service Website</span><span>HTML + CSS + JS</span></div><p>Live: snpus.com — Custom-coded responsive website from scratch.</p>';
+  html += '<div class="row"><span>Pet Adoption Platform</span><span>MERN Stack</span></div><p>Full-stack platform with pet profiles, adoption requests, donations, and vaccination records.</p>';
+  html += '<div class="row"><span>Spotify Clone</span><span>React.js + Tailwind CSS</span></div><p>Music streaming UI with playlist browsing and playback interface.</p>';
+  html += '<h2>Technical Skills</h2><div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">React.js</span><span class="tag">Tailwind CSS</span><span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">WordPress</span><span class="tag">n8n Automation</span><span class="tag">Meta WhatsApp API</span><span class="tag">Evolution API</span><span class="tag">Telegram Bot</span><span class="tag">SEO</span></div>';
+  html += '<h2>Soft Skills</h2><div class="tags"><span class="tag">Teamwork</span><span class="tag">Adaptability</span><span class="tag">Quick Learner</span><span class="tag">Active Listening</span><span class="tag">Problem Solving</span></div>';
+  html += '<h2>Education</h2><div class="row"><span>BCA — GLS University, Ahmedabad</span><span>2025 | CGPA: 7.1</span></div><div class="row"><span>H.S.C — Dholakiya School, Rajkot (GSEB)</span><span>2022 | 69.14%</span></div><div class="row"><span>S.S.C — New Era School, Rajkot (GSEB)</span><span>2020 | 60%</span></div>';
+  html += '<h2>Personal Information</h2><p>Gender: Male &nbsp;|&nbsp; DOB: September 3, 2003 &nbsp;|&nbsp; Languages: English, Hindi, Gujarati &nbsp;|&nbsp; Nationality: Indian</p>';
+  html += '<h2>Hobbies</h2><p>Cricket &nbsp;|&nbsp; Badminton &nbsp;|&nbsp; Listening to Music &nbsp;|&nbsp; Building Projects</p></body></html>';
+  var blob = new Blob([html], {type:'text/html'});
+  window.open(URL.createObjectURL(blob), '_blank');
+}
+
+// Init
+(function init(){
+  go('home');
+  startType();
+  setTimeout(function(){
+    runCounter('cnt1', 13, '+');
+    runCounter('cnt2', 12, '+');
+    runCounter('cnt3', 8, '');
+  }, 400);
+  initReveal();
+})();
+</script>
+</body>
+</html>
